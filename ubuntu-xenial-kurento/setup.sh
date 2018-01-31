@@ -10,12 +10,13 @@ apt-get -y install apt-utils wget curl build-essential
 
 # Add repos of Kurento 
 
-wget http://ubuntu.kurento.org/kurento.gpg.key -O - | apt-key add -  # add kurento key
+#wget http://ubuntu.kurento.org/kurento.gpg.key -O - | apt-key add -  # add kurento key
 
-echo "deb http://ubuntu.kurento.org xenial kms6" | tee /etc/apt/sources.list.d/kurento.list # add kurento repos
+echo "deb [trusted=yes] http://ubuntu.kurento.org xenial-dev kms6" | tee /etc/apt/sources.list.d/kurento.list # add kurento repos
+
 
 # Install kurento
 
 echo "Installing Kurento"
 apt-get update
-apt-get -y install kurento-media-server
+apt-get -y install kurento-media-server-6.0
