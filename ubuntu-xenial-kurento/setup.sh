@@ -1,19 +1,21 @@
 #!/bin/sh
 
-# change to our own mirror
-echo "deb http://deb.debian.org/debian/ testing main non-free contrib" > /etc/apt/sources.list
-echo "deb-src http://deb.debian.org/debian/ testing main non-free contrib" >> /etc/apt/sources.list  
-
-# requirements
-
-echo "Upgrading the container"
+#  Update container 
 apt-get update
 apt-get -y upgrade
 
-echo "Installing Packages required for building Debian packages"
+# Installing some required  packages
 
-#install apt-utils first
-apt-get -y install apt-utils
+apt-get -y install apt-utils wget curl build-essential
 
-#install other dependencies required for building Debian packages
-apt-get -y install git dh-make build-essential autoconf autotools-dev figlet debhelper lintian devscripts
+# Add repos of Kurento 
+
+wget http://ubuntu.kurento.org/kurento.gpg.key -O - | apt-key add -  # add kurento key
+
+echo "deb http://ubuntu.kurento.org xenial kms6" | tee /etc/apt/sources.list.d/kurento.list # add kurento repos
+
+# Install kurento
+
+echo "Installing Kurento"
+apt-get update
+apt-get -y install kurento-media-server
