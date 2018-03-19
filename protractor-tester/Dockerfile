@@ -13,7 +13,7 @@ RUN apt-get -y install openjdk-8-jdk openjdk-8-jre #installing java which is req
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - #install nodejs and npm
 
-RUN apt-get install -y nodejs figlet chromium firefox-esr #install firefox and chromium browser
+RUN apt-get install -y nodejs figlet chromium firefox #install firefox and chromium browser
 
 RUN apt-get -y install xvfb #install xvfb for headless display
 
@@ -38,9 +38,6 @@ RUN bower -v | figlet #checking version of bower
 RUN npm install gulp-cli -g
 RUN npm install gulp -D
 RUN gulp --version
-RUN npm install #installing npm modules
-RUN bower --allow-root install  #installing some dependencies with bower
-RUN gulp build #testing gulp build
 
 #Setup the environemnt for running web-driver
 
