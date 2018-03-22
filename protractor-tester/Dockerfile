@@ -15,14 +15,13 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - #install nodejs and n
 
 RUN apt-get install -y nodejs figlet chromium firefox #install firefox and chromium browser
 
-RUN apt-get -y install xvfb #install xvfb for headless display
+RUN apt-get -y install xvfb recordmydesktop#install xvfb for headless display and the screen recorder for recording tests.
 
 #Check version of respective packages
 RUN nodejs --version | figlet #check version of nodejs
 RUN npm --version | figlet #check version of npm
 RUN firefox -v #check version of firefox
 RUN java -version #check version of java
-
 
 # Do some clean up. 
 RUN apt-get -y autoremove --purge
