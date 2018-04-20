@@ -15,7 +15,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - #install nodejs and n
 
 RUN apt-get install -y nodejs figlet chromium firefox #install firefox and chromium browser
 
-RUN apt-get -y install xvfb recordmydesktop#install xvfb for headless display and the screen recorder for recording tests.
+RUN apt-get -y install xvfb recordmydesktop #install xvfb for headless display and the screen recorder for recording tests.
 
 #Check version of respective packages
 RUN nodejs --version | figlet #check version of nodejs
@@ -41,3 +41,7 @@ RUN gulp --version
 #Setup the environemnt for running web-driver
 
 RUN webdriver-manager update #update the selenium webdriver
+EXPOSE 80
+EXPOSE 4444
+EXPOSE 44751
+EXPOSE 37411
