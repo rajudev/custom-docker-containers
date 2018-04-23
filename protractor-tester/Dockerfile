@@ -1,21 +1,15 @@
-FROM debian:sid
+FROM ubuntu:xenial
 MAINTAINER rajudev
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get -y dist-upgrade
+RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 
-RUN apt-get -y install curl gpg apt-utils git wget #install eseentials for the node setup
+RUN apt-get -y install curl gpg apt-utils git wget openjdk-8-jdk openjdk-8-jre #installing java which is required by selenium to work
 
-RUN apt-get -y install openjdk-8-jdk openjdk-8-jre #installing java which is required by selenium to work
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - #install nodejs and npm
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - #install nodejs and npm
-
-RUN apt-get install -y nodejs figlet chromium firefox #install firefox and chromium browser
-
-RUN apt-get -y install xvfb recordmydesktop #install xvfb for headless display and the screen recorder for recording tests.
+RUN apt-get install -y nodejs figlet chromium firefox xvfb recordmydesktop #install xvfb for headless display and the screen recorder for recording tests.
 
 #Check version of respective packages
 RUN nodejs --version | figlet #check version of nodejs
