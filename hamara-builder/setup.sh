@@ -15,7 +15,7 @@ apt-get -y upgrade
 #install other dependencies required for building Debian packages
 
 echo "Installing Packages required for building Debian packages"
-apt-get -y install git dh-make build-essential autoconf autotools-dev figlet debhelper lintian devscripts
+apt-get -y install git dh-make build-essential autoconf autotools-dev figlet debhelper lintian devscripts live-build live-config
 
 #Clean package files to save space and reduce the size of container. 
 
