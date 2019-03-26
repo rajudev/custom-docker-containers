@@ -1,22 +1,40 @@
-#!/bin/sh
 
-#  Update container 
+# Remove the "unable to initialize frontend: Dialog"
+export DEBIAN_FRONTEND=noninteractive
+
 apt-get update
-apt-get -y upgrade
+#apt-get -y dist-upgrade
 
-# Installing some required  packages
+# let's install apt-utils first to get rid of apt errors
+apt-get -y install apt-utils
 
-apt-get -y install apt-utils wget curl build-essential
+#lets install some more required utilities
 
-# Add repos of Kurento 
+apt-get install -y wget curl
 
-#wget http://ubuntu.kurento.org/kurento.gpg.key -O - | apt-key add -  # add kurento key
-
-echo "deb [trusted=yes] http://ubuntu.kurento.org xenial-dev kms6" | tee /etc/apt/sources.list.d/kurento.list # add kurento repos
+#Add Kurento's repositories
 
 
-# Install kurento
+echo "deb http://ubuntu.kurento.org/ xenial kms6" | tee /etc/apt/sources.list.d/kurento.list \
+	&& wget -O - http://ubuntu.kurento.org/kurento.gpg.key | apt-key add - \
+	&& apt-get update
 
-echo "Installing Kurento"
-apt-get update
+# Install build Pre requisites
+
+echo "Installing build dependencies"
+apt-get -y install git build-essential devscripts
+
+apt-get -y  install cmake debhelper binutils kms-core-6.0-dev kms-elements-6.0-dev kms-filters-6.0-dev \
+				libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev \
+				libboost-test-dev libboost-thread-dev libboost-log-dev libevent-dev libssl-dev
+
+apt-get -y install libboost-all-dev libssl-dev pkg-config libevent-dev
+
+
+#install kurento-media-server
+
 apt-get -y install kurento-media-server-6.0
+
+
+#Install the coturn server
+apt-get -y  install coturn
